@@ -1,0 +1,14 @@
+{
+  "name": "serverless-apigwy-binary",
+  "version": "1.0.0",
+  "description": "Serverless framework plugin to configure binary support for API Gateway endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryan Lewis<ryan@ryanhlewis.com",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.0"
+  }
+}
