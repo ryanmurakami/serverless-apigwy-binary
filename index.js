@@ -68,8 +68,10 @@ class ApiGwyBinaryPlugin {
     .then(() => new BbPromise(resolve => setTimeout(() => resolve(), 60000)))
     .then(() => {
       this.serverless.cli.log('Deploying content handling updates to AWS API Gateway...')
+      const stageName = this.getApiGatewayStageName()
+
       return apigateway.createDeployment({
-        stageName: this.options.stage,
+        stageName: stageName,
         restApiId: integrationResponse.restApiId
       }).promise()
     })
@@ -93,6 +95,20 @@ class ApiGwyBinaryPlugin {
       })
     })
     return validFuncs
+  }
+
+  getApiGatewayStageName() {
+    const template = this.serverless.service.provider.compiledCloudFormationTemplate
+    let stageNameStage, stageNameDeploy
+    Object.keys(template.Resources).forEach(function(key){
+      if (template.Resources[key]['Type'] == 'AWS::ApiGateway::Stage') {
+        stageNameStage = template.Resources[key].Properties.StageName
+      }
+      if (template.Resources[key]['Type'] == 'AWS::ApiGateway::Deployment') {
+        stageNameDeploy = template.Resources[key].Properties.StageName
+      }
+    })
+    return stageNameStage? stageNameStage: stageNameDeploy;
   }
 }
 
