@@ -31,7 +31,7 @@ class ApiGwyBinaryPlugin {
       statusCode: '200'
     }
 
-    apigateway
+    return apigateway
     .getRestApis()
     .promise()
     .then((apis) => {
