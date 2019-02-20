@@ -53,10 +53,11 @@ class ApiGwyBinaryPlugin {
               r => r.path === `/${e.http.path}`).id
 
             if (e.http.response) {
-              integrationResponse.responseParameters = {};
-              Object.keys(e.http.response.headers || {}).forEach(key => {
-                integrationResponse.responseParameters[`method.response.header.${key}`] = e.http.response.headers[key]
-              })
+              integrationResponse.responseParameters =
+                Object.keys(e.http.response.headers || {}).reduce((acc, key) => {
+                  acc[`method.response.header.${key}`] = e.http.response.headers[key]
+                  return acc
+              }, {})
             }
 
             integrationPromises
