@@ -52,6 +52,14 @@ class ApiGwyBinaryPlugin {
             integrationResponse.resourceId = resources.items.find(
               r => r.path === `/${e.http.path}`).id
 
+            if (e.http.response) {
+              integrationResponse.responseParameters =
+                Object.keys(e.http.response.headers || {}).reduce((acc, key) => {
+                  acc[`method.response.header.${key}`] = e.http.response.headers[key]
+                  return acc
+              }, {})
+            }
+
             integrationPromises
             .push(apigateway.putIntegrationResponse(integrationResponse).promise())
           }
