@@ -9,6 +9,12 @@ class ApiGwyBinaryPlugin {
     this.hooks = {
       'after:aws:deploy:deploy:updateStack': this.configureApiGwy.bind(this)
     }
+
+    serverless.configSchemaHandler.defineFunctionEventProperties('aws', 'http', {
+      properties: {
+        contentHandling: { type: 'string' },
+      },
+    });
   }
 
   configureApiGwy () {
