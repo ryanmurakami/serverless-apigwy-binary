@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Serverless framework plugin to configure binary support for API Gateway endpoints",
   "main": "index.js",
+  "repository": "ryanmurakami/serverless-apigwy-binary",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
