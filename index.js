@@ -1,4 +1,5 @@
 const BbPromise = require('bluebird')
+const semver = require('semver')
 
 class ApiGwyBinaryPlugin {
   constructor (serverless, options) {
@@ -7,6 +8,15 @@ class ApiGwyBinaryPlugin {
     this.provider = this.serverless.getProvider('aws')
 
     this.hooks = {
+      initialize: () => {
+        if (!serverless.version || !serverless.logDeprecation) return;
+        if (!semver.gte(serverless.version, '1.59.0')) return;
+        serverless.logDeprecation(
+          'OBSOLETE_APIGWY_BINARY_PLUGIN',
+          '"serverless-apigwy-binary" plugin is no longer needed. Please uninstall it as it will not work with next Framework major release.\n' +
+            'To migrate simply configure setting in following way "functions[].events.http.responce.contentHandling: CONVERT_TO_BINARY"'
+        );
+      },
       'after:aws:deploy:deploy:updateStack': this.configureApiGwy.bind(this)
     }
   }
