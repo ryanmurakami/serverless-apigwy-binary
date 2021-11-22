@@ -10,6 +10,10 @@
   "author": "Ryan Lewis<ryan@ryanhlewis.com",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.0"
+    "bluebird": "^3.5.0",
+    "semver": "^7.3.5"
+  },
+  "peerDependencies": {
+    "serverless": "1 || 2"
   }
 }
