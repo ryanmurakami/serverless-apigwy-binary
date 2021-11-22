@@ -1,6 +1,6 @@
 {
   "name": "serverless-apigwy-binary",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Serverless framework plugin to configure binary support for API Gateway endpoints",
   "main": "index.js",
   "repository": "ryanmurakami/serverless-apigwy-binary",
